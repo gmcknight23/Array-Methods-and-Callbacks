@@ -96,9 +96,9 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(data, getYearsCB, getWinnersCB) {
-    const winners = getWinnersCB(data, getFinals);
-    const years = getYearsCB(data, getFinals);
+function getWinnersByYear(data, getFinalsCB, getYearsCB, getWinnersCB) {
+    const winners = getWinnersCB(data, getFinalsCB);
+    const years = getYearsCB(data, getFinalsCB);
     return winners.map((item, index)=> `In ${years[index]}, ${item} won the world cup!`);  
 }
 
@@ -114,14 +114,14 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(data) {
-   const averageHomeGoals = data.reduce(function(acc, item){
+function getAverageGoals(getFinalsCB) {
+   const averageHomeGoals = getFinalsCB.reduce(function(acc, item){
        return acc + item['Home Team Goals'] + item['Away Team Goals'];
-   }, 0)
-   return (averageHomeGoals / data.length).toFixed(2);
+   }, 0);
+   return (averageHomeGoals / getFinalsCB.length).toFixed(2);
 }
 
-console.log(getAverageGoals(fifaData));
+console.log(getAverageGoals(getFinals(fifaData)));
 
 
 /// 🥅 STRETCH 🥅 ///
@@ -132,22 +132,48 @@ Create a function called `getCountryWins` that takes the parameters `data` and `
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
-function getCountryWins(/* code here */) {
 
-    /* code here */
 
-}
+
+// function getCountryWins(data, initials) {
+
+//     const totalWins = data.reduce(getcount,0)
+    
+//     function getcount (acc, item){
+      
+//         if((item['Home Team Initials'] === initials || item['Away Team Initials']) && item.Stage === 'Final'){
+    
+//             acc=acc+1;
+            
+//         }
+//         return acc;
+//     }
+  
+//     return totalWins;
+//  }
+
+//console.log(getCountryWins(fifaData, 'GER'))
+
+
 
 
 
 /* 💪💪💪💪💪 Stretch 2: 💪💪💪💪💪 
 Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
 
-function getGoals(/* code here */) {
 
-    /* code here */
 
-}
+// function getGoals(data) {
+//   const newData = getFinals(data)
+//     const teamName = newData.reduce(function(acc, item){
+//         if(item['Home Team Name'] === 'Germany' || item['Away Team Name'] === 'Germany'){
+//             acc = acc + getAverageGoals(item)
+//         }
+//         return acc
+//     },0);
+// }
+     
+//      console.log(getGoals(fifaData));
 
 
 /* 💪💪💪💪💪 Stretch 3: 💪💪💪💪💪
